@@ -1,11 +1,13 @@
-﻿using System;
+﻿using PhantasyBot.Application;
 
 namespace PhantasyBot
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
+            var bot = new Bot();
+            bot.Start().ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 }
