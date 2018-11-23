@@ -19,7 +19,19 @@ namespace PhantasyBot.Application.Controllers
         [Aliases("works", "w")]
         public async Task Working(CommandContext ctx)
         {
-            await Execute(async () => await _logic.TestWorking(ctx));
+            await Execute(ctx, async () => await _logic.TestWorking(ctx));
+        }
+
+        [Command("join")]
+        public async Task Join(CommandContext ctx)
+        {
+            await Execute(ctx, async () => await _logic.TestJoin(ctx));
+        }
+
+        [Command("leave")]
+        public async Task Leave(CommandContext ctx)
+        {
+            await Execute(ctx, async () => await _logic.TestLeave(ctx));
         }
     }
 }

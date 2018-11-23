@@ -3,6 +3,7 @@ using DSharpPlus.CommandsNext;
 using PhantasyBot.Application.Controllers;
 using PhantasyBot.Application.Helpers;
 using PhantasyBot.DataAccess.Config;
+using PhantasyBot.DataAccess.Database.Contexts;
 using System.Threading.Tasks;
 
 namespace PhantasyBot.Application
@@ -16,6 +17,10 @@ namespace PhantasyBot.Application
         public Bot()
         {
             _config = new Config();
+            using (var db = new MainContext())
+            {
+                db.Database.EnsureCreated();
+            }
         }
 
         public async Task Start()
@@ -43,6 +48,7 @@ namespace PhantasyBot.Application
         private void RegisterCommandControllers()
         {
             _commandsModule.RegisterCommands<TestController>();
+            _commandsModule.RegisterCommands<MessageController>();
         }
 
         private void RegisterEvents()
